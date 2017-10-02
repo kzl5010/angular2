@@ -2,8 +2,14 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/HelloMongoose';
+mongoose.connect(MONGODBURI);
+console.log(MONGODBURI);
 
 const api = require('./server/routes/api');
+const User = require('./app/models/user');
 
 const app = express();
 
