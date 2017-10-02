@@ -10,19 +10,19 @@ router.get('/', (req, res) => {
 });
 
 router.route('/users')
-  .post(function(req, res) {
+  .post((req, res) => {
     const user = new User();
     user.email = req.body.email;
     user.password = req.body.password;
-    user.save(function(err) {
+    user.save((err) => {
       if (err) {
         res.send(err);
       }
       res.json({ message: 'USER MADE!' });
     });
   })
-  .get(function(req, res) {
-    User.find(function(err, users) {
+  .get((req, res) => {
+    User.find((err, users) => {
       if (err) res.send(err);
       console.log(users);
       res.json(users);
@@ -30,37 +30,33 @@ router.route('/users')
   });
 
 router.route('/users/:user_id')
-  .get(function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
-      err ? res.send(err) : res.json(user)
-    })
+  .get((req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+      err ? res.send(err) : res.json(user);
+    });
   })
-  .put(function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
+  .put((req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
       if (err) res.send(err);
       user.password = req.body.password;
 
       user.save(function(err) {
         err ? res.send(err) : res.json({ message: 'User updated!' })
-      })
-    })
+      });
+    });
   })
-  .delete(function(req, res) {
+  .delete((req, res) => {
     User.remove({
-      _id: req.params.user_id
-    }, function(err) {
+      _id: req.params.user_id,
+    }, (err) => {
       err ? res.send(err) : res.json({ message: 'User deleted!' });
     });
   });
 
 router.get('/posts', (req, res) => {
   axios.get(`${API}/posts`)
-    .then(posts => {
-      res.status(200).json(posts.data);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    });
+    .then(posts => res.status(200).json(posts.data))
+    .catch(error => res.status(500).send(error));
 });
 
 module.exports = router;
