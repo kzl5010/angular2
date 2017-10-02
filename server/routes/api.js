@@ -29,6 +29,23 @@ router.route('/users')
     });
   });
 
+router.route('/users/:user_id')
+  .get(function(req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      err ? res.send(err) : res.json(user)
+    })
+  })
+  .put(function(req, res) {
+    User.findById(req.params.user_id, function(err, user) {
+      if (err) res.send(err);
+      user.password = req.body.password;
+
+      user.save(function(err) {
+        err ? res.send(err) : res.json({ message: 'User updated!' })
+      })
+    })
+  });
+
 router.get('/posts', (req, res) => {
   axios.get(`${API}/posts`)
     .then(posts => {
