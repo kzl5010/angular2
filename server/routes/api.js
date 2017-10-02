@@ -18,7 +18,7 @@ router.route('/users')
       if (err) {
         res.send(err);
       }
-      res.json({message: 'USER MADE!'});
+      res.json({ message: 'USER MADE!' });
     });
   })
   .get(function(req, res) {
@@ -44,6 +44,13 @@ router.route('/users/:user_id')
         err ? res.send(err) : res.json({ message: 'User updated!' })
       })
     })
+  })
+  .delete(function(req, res) {
+    User.remove({
+      _id: req.params.user_id
+    }, function(err) {
+      err ? res.send(err) : res.json({ message: 'User deleted!' });
+    });
   });
 
 router.get('/posts', (req, res) => {
