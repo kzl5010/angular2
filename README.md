@@ -1,3 +1,7 @@
+# Live Site 
+
+This project was deployed to Heroku using Mongolab at https://meantdl.herokuapp.com/
+
 # MeanChecklist
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
