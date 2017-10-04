@@ -3,6 +3,8 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
 
 const MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/HelloMongoose';
 mongoose.connect(MONGODBURI);

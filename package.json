@@ -31,6 +31,8 @@
     "express": "^4.16.1",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.14",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
