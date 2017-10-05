@@ -1,12 +1,20 @@
 const express = require('express');
 const router = express.Router();
-
+const { noAuth } = require('../middleware/auth.js');
+const { passport } = require('../../server.js');
 const axios = require('axios');
 const API = 'https://jsonplaceholder.typicode.com';
 const User = require('../../app/models/user');
 
 router.get('/', (req, res) => {
   res.send('api works');
+});
+
+router.post('/login', [noAuth, passport.authenticate('login-local')], (req, res) => res.send(req.user));
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.send();
 });
 
 router.route('/users')

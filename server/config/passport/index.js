@@ -1,6 +1,3 @@
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt-nodejs');
-const userModel = require('../../../app/models/user');
 const loginLocal = require('./loginLocal.js');
 const registerLocal = require('./registerLocal.js');
 

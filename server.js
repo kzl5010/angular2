@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
 
 const app = express();
 
@@ -27,6 +26,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'hesbeginningtobelieve' }));
 app.use(express.static(path.join(__dirname, 'dist')));
+require('./server/config/passport')(passport);
+
+exports.passport = passport;
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', api);
