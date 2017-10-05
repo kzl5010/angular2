@@ -28,9 +28,9 @@ app.use(session({ secret: 'hesbeginningtobelieve' }));
 app.use(express.static(path.join(__dirname, 'dist')));
 require('./server/config/passport')(passport);
 
-exports.passport = passport;
 app.use(passport.initialize());
 app.use(passport.session());
+module.exports = passport;
 app.use('/api', api);
 
 app.get('*', (req, res) => {

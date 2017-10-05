@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { noAuth } = require('../middleware/auth.js');
-const { passport } = require('../../server.js');
+const passport = require('../../server.js');
 const axios = require('axios');
 const API = 'https://jsonplaceholder.typicode.com';
 const User = require('../../app/models/user');
@@ -15,6 +15,18 @@ router.post('/login', [noAuth, passport.authenticate('login-local')], (req, res)
 router.get('/logout', (req, res) => {
   req.logout();
   res.send();
+});
+
+router.post('/register', noAuth, (req, res) => {
+  const user = new User();
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.save((err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: 'USER MADE!' });
+  });
 });
 
 router.route('/users')
