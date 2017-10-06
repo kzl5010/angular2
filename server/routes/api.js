@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { noAuth } = require('../middleware/auth.js');
 const axios = require('axios');
+const bcrypt = require('bcrypt-nodejs');
 const API = 'https://jsonplaceholder.typicode.com';
 const User = require('../../app/models/user');
 
@@ -20,7 +21,8 @@ module.exports = (passport) => {
   router.post('/register', noAuth, (req, res) => {
     const user = new User();
     user.email = req.body.email;
-    user.password = req.body.password;
+    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    // user.password = req.body.password;
     user.save((err) => {
       if (err) {
         res.send(err);
