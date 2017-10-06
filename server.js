@@ -16,7 +16,7 @@ console.log(MONGODBURI);
 
 exports.mongoose = mongoose;
 
-const api = require('./server/routes/api');
+const api = require('./server/routes/api')(passport);
 const User = require('./app/models/user');
 
 //use passport initialize file in server
