@@ -11,8 +11,8 @@ const passport = require('passport');
 const app = express();
 
 const MONGODBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/HelloMongoose';
-mongoose.connect(MONGODBURI);
-console.log(MONGODBURI);
+// mongoose.connect(MONGODBURI);
+// console.log(MONGODBURI);
 
 exports.mongoose = mongoose;
 
